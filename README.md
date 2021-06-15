@@ -6,6 +6,8 @@ This Unity project contains the required scripts for interfacing the Thalmic Myo
 
 The repository also contains a ready-to-use demo scene.
 
+[![Watch the video](https://github.com/pili-zhangqiu/MyoSaveRoutine/blob/main/img/UnityScene.png)](https://vimeo.com/563161873)
+
 ## 01 - Essential folders in Assets
 The Assets folder contains the Unity project with the demo scenes, assets and C# scripts:
 
@@ -42,4 +44,4 @@ These are the main scripts controlling the sample scene (*SampleMyoSave.unity*).
 - **RecordingRoutine.csv:** Defines the different stages of the EMG recording/saving routine. Currently link to the state of the switch button.
 
 
-[here](link here):
+
