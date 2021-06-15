@@ -44,4 +44,44 @@ These are the main scripts controlling the sample scene (*SampleMyoSave.unity*).
 - **RecordingRoutine.csv:** Defines the different stages of the EMG recording/saving routine. Currently link to the state of the switch button.
 
 
+## 02 - How to Implement the Package
+### 02.A - Setting up your Unity Project:
+To add the Myo-Unity EMG recorder capabilities to your Unity project:
+
+<img src="https://github.com/pili-zhangqiu/MyoSaveRoutine/blob/main/img/Myo-Unity_CopyFiles.jpg" width="60%" height="60%">
+
+1. Copy the **Thalmic Myo folder** to your Unity's project Assets folder.
+2. Copy the Thalmic Hub and EMG game element (and children) into your Unity project hierarchy. If required, relink the scripts to the matching C# scripts in the Thalmic Myo folder.
+3. To control the EMG recording/saving routine, you can access and change the **saveSwitch** variable value from the */ThalmicMyo/MyoEMG/SaveRoutine.cs* file in the following way:
+    - **To start the recording**:
+      - **saveSwitch = 0**: Idle *or* fill data holders.
+      - **saveSwitch = 1**: Flag to start recording data. Resets the data holders prior to the start of the recording process and defines the start time.
+      - **saveSwitch = 0**: Idle *or* fill data holders. It is necessary to change the value to 0 after 1; if not, it will enter a data resetting loop.  
+    - **To end the recording and save the CSV data**:
+      - **saveSwitch = 2**: Flag to end recording. Saves the 8 sEMG data and timestamps into a uniquely named CSV file (RawEMG-*current_timestamp*) to prevent accidental overwriting. You can find an example CSV file in the project /MyoEMG/CSV folder.
+    - You can find an **example of implementing it in your project scripts** in the scripts *Assets/ButtonEMG.csv* and *Assets/RecordingRoutine.csv*.
+
+<img src="https://github.com/pili-zhangqiu/MyoSaveRoutine/blob/main/img/Myo-Unity_StartEndRoutine.jpg" width="75%" height="75%">
+
+### 02.B - Getting your Myo ready:
+For the implementation to work, you will need to have your dongle connected to the PC, as well as your **Myo Connect** application running and your armband connected to *Myo Connect > Armband Manager*. 
+
+<img src="https://user-images.githubusercontent.com/32870045/122043736-982fe000-cdd3-11eb-8f50-907986e53f87.png" width="40%" height="40%">
+
+You will also have to wait for your armband to entered the 'Locked' status, which usually takes a few seconds to warm up. If this does not happen, close the *Myo Connect* application and rerun it.
+
+<img src="https://github.com/pili-zhangqiu/MyoSaveRoutine/blob/main/img/MyoLocked.PNG" width="20%" height="20%">
+
+## 03 - Troubleshooting:
+- **If Unity cannot find the Myo:**
+    - Close the *Myo Connect* application and rerun it.
+    - Make sure that the dongle is connected and the device appears in *Myo Connect > Armband Manager*
+    - Open http://diagnostics.myo.com/. If the Bluetooth communication between Myo and PC is working, you will be able to access its data through the webapp
+- **If you get a Unity error saying *ThalmicHub couldn't be initialized***:
+    - Extra Unity Free Steps:
+        - If you have Unity Pro, you’re all set up. If you are using the **free Unity version**, do the following: 
+        - Take the myo.dll that’s in the plugins/x86 folder (if you are using Windows OS) and drop it into your main project folder. Follow these steps:
+    - Further information can be found at: https://developerblog.myo.com/setting-myo-package-unity/
+
+
 
